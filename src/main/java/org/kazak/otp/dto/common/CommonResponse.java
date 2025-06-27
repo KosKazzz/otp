@@ -18,5 +18,5 @@ public class CommonResponse<T>{
     private T body;
 
     private String errorMessage;
-    List<ValidationError> validationErrorList;
+    private List<ValidationError> validationErrorList;
 }

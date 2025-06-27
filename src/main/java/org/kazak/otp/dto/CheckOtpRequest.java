@@ -11,7 +11,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OtpDto {
+public class CheckOtpRequest {
 
     private UUID id;
     private String otp;

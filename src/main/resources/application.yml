@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /${spring.application.name}
+
+spring:
+  application:
+    name: otp
+
+custom-logging:
+  log-exec-time: true
+  web-logging:
+    enabled: true
+    log-body: true
