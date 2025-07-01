@@ -7,7 +7,6 @@ import org.kazak.otp.dto.CheckOtpRequest;
 import org.kazak.otp.dto.GenerateAndSendOtpRequest;
 import org.kazak.otp.dto.common.CommonRequest;
 import org.kazak.otp.dto.common.CommonResponse;
-import org.kazak.otp.model.PassInfoModel;
 import org.kazak.otp.service.OtpService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,18 +24,17 @@ public class OtpController {
 
     @LogExecutionTime
     @PostMapping("/generateAndSend")
-    public CommonResponse<String> generateAndSend(@RequestBody @Valid CommonRequest<GenerateAndSendOtpRequest> request) {
+    public CommonResponse<Void> generateAndSend(@RequestBody @Valid CommonRequest<GenerateAndSendOtpRequest> request) {
 
-        PassInfoModel passInfoModel = otpService.generatePassInfo(request.getBody());
-        otpService.sendPassInfo(passInfoModel);
+        otpService.generateAndSendPassInfo(request.getBody());
 
-        return CommonResponse.<String>builder().body("OK").id(UUID.randomUUID()).build();
+        return CommonResponse.<Void>builder().id(UUID.randomUUID()).build();
     }
 
     @LogExecutionTime
     @PostMapping("/check")
-    public CommonResponse<String> chek(@RequestBody @Valid CommonRequest<CheckOtpRequest> request) {
+    public CommonResponse<Void> chek(@RequestBody @Valid CommonRequest<CheckOtpRequest> request) {
 
-        return CommonResponse.<String>builder().body("OK").id(UUID.randomUUID()).build();
+        return CommonResponse.<Void>builder().id(UUID.randomUUID()).build();
     }
 }

@@ -6,7 +6,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.kazak.otp.dto.common.CommonResponse;
 import org.kazak.otp.dto.common.ValidationError;
+import org.kazak.otp.exception.OtpException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -67,5 +70,15 @@ public class OtpExceptionHandler {
                     .build();
         }
         return handleException(e);
+    }
+
+    @ExceptionHandler(OtpException.class)
+    public ResponseEntity<String> otpExceptionHandler(OtpException e) {
+        log.info("Ошибка сервиса One Time Password");
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .contentType(MediaType.TEXT_HTML)
+                .body(e.getMessage());
     }
 }
