@@ -8,14 +8,13 @@ import org.kazak.otp.dto.common.CommonResponse;
 import org.kazak.otp.dto.common.ValidationError;
 import org.kazak.otp.exception.OtpException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,6 +24,8 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 @RequiredArgsConstructor
 public class OtpExceptionHandler {
+
+    private final RestClient.Builder builder;
 
     @ExceptionHandler(Exception.class)
     public CommonResponse<?> handleException(Exception e) {
@@ -72,13 +73,13 @@ public class OtpExceptionHandler {
         return handleException(e);
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(OtpException.class)
-    public ResponseEntity<String> otpExceptionHandler(OtpException e) {
-        log.info("Ошибка сервиса One Time Password");
+    public CommonResponse<?> otpExceptionHandler(OtpException e) {
+        log.warn("Ошибка сервиса One Time Password - {}",e.getMessage());
 
-        return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .contentType(MediaType.TEXT_HTML)
-                .body(e.getMessage());
+        return CommonResponse.builder()
+                .errorMessage(e.getMessage())
+                .build();
     }
 }

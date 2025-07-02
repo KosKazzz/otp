@@ -9,6 +9,4 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 public class PassInfoModel {
-
-
 }
