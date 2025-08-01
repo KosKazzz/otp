@@ -1,10 +1,22 @@
 server:
   servlet:
     context-path: /${spring.application.name}
+  port: 8081
 
 spring:
   application:
     name: otp
+
+  datasource:
+    url: jdbc:postgresql://localhost:5435/menti_db_otp
+    username: dev
+    password: Ab123456
+    hikari:
+     schema: otp_service
+     connection-init-sql: CREATE SCHEMA IF NOT EXISTS ${spring.datasource.hikari.schema}
+
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.yaml
 
 custom-logging:
   log-exec-time: true
