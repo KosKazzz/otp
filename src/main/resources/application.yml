@@ -17,6 +17,10 @@ spring:
 
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.yaml
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
 
 custom-logging:
   log-exec-time: true
