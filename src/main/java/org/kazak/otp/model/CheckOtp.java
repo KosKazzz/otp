@@ -15,9 +15,9 @@ import java.util.UUID;
 
 @Data
 @Builder
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class CheckOtp extends AuditableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -36,6 +36,6 @@ public class CheckOtp extends AuditableEntity{
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return getClass().hashCode();
     }
 }

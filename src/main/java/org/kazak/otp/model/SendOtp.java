@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.kazak.otp.constants.DeliveryStatus;
+import org.kazak.otp.model.enums.DeliveryStatus;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -19,9 +19,9 @@ import java.util.UUID;
 
 @Data
 @Builder
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class SendOtp extends AuditableEntity {
 
     @Id
@@ -38,7 +38,7 @@ public class SendOtp extends AuditableEntity {
     private String encodedOtp;
     private String sendMessageKey;
     @Enumerated(EnumType.STRING)
-    private DeliveryStatus status; // mb enum???
+    private DeliveryStatus status;
     private LocalDateTime sendTime;
 
     @Override
@@ -50,6 +50,6 @@ public class SendOtp extends AuditableEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return getClass().hashCode();
     }
 }

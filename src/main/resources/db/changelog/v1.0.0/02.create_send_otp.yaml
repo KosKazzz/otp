@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: "01.create_send_otp.yaml"
+      id: "02.create_send_otp.yaml"
       author: "k.kazantsev"
       changes:
         - createTable:
