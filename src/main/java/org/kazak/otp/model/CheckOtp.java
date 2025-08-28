@@ -6,14 +6,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,9 +24,21 @@ public class CheckOtp extends AuditableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    /**
+     * Идентефикатор процесса, в рамках которого запрашивается одноразовый пароль
+     */
     private String processId;
+    /**
+     * Введённый клиентом код
+     */
     private String otp;
+    /**
+     * Время проверки
+     */
     private LocalDateTime checkTime;
+    /**
+     * Признак корректности введённого пароля
+     */
     private Boolean correct;
 
     @Override
