@@ -1,0 +1,17 @@
+volumes:
+  postgres_volume:
+
+
+services:
+  postgres-link-shortener:
+    image: postgres:latest
+    container_name: postgres-menti-otp
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_DB: menti_db_otp
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: Ab123456

@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: release/1.0.0
+      author: "k.kazantsev"
+      changes:
+        - tagDatabase:
+            tag: release/1.0.0
+  - include:
+      file: 02.create_send_otp.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: 01.create_check_otp.yaml
+      relativeToChangelogFile: true
