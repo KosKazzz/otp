@@ -37,6 +37,7 @@ public class OtpExceptionHandler {
                 .build();
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public CommonResponse<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
@@ -44,7 +45,8 @@ public class OtpExceptionHandler {
         List<ValidationError> errorList = bindingResult.getFieldErrors().stream().map(err -> ValidationError.builder()
                 .field(err.getField())
                 .message(err.getDefaultMessage())
-                .build()).toList();
+                .build())
+                .toList();
 
         log.warn("Ошибка валидации. {} ", errorList, e);
 
