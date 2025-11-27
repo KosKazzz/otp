@@ -5,7 +5,7 @@ volumes:
 services:
   postgres-link-shortener:
     image: postgres:latest
-    container_name: postgres-menti-otp
+    container_name: postgres-menti_db_otp
     volumes:
       - postgres_volume:/var/lib/postgresql/data
     restart: unless-stopped
